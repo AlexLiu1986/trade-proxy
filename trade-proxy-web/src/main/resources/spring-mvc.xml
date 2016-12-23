@@ -8,6 +8,9 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd ">
 
+    <!-- httpclient配置 -->
+    <import resource="spring-http.xml"/>
+
     <!--开启注解功能 -->
     <context:annotation-config/>
 

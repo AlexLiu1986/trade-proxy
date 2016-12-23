@@ -6,6 +6,8 @@ import com.lecheng.trade.facade.dto.RespObj;
 import com.lecheng.trade.facade.dto.customers.regist.GetVCodeRequest;
 import com.lecheng.trade.facade.dto.customers.regist.GetVoiceVCodeRequest;
 import com.lecheng.trade.service.customers.RegistService;
+import com.lecheng.trade.utils.HttpClientUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +20,12 @@ import org.springframework.stereotype.Service;
 public class RegistServiceImpl implements RegistService {
 
     /**
+     * http通讯客户端
+     */
+    @Autowired
+    private HttpClientUtils httpClient;
+
+    /**
      * 获取注册短信验证码
      *
      * @param req
@@ -25,6 +33,7 @@ public class RegistServiceImpl implements RegistService {
      */
     @Override
     public RespObj<BaseResponse> getVCode(ReqObj<GetVCodeRequest> req) {
+        httpClient.doPost("http://192.168.224.63:8080/sms-gateway/gateway/sendMessage", "");
         return null;
     }
 
