@@ -6,8 +6,7 @@ import com.lecheng.trade.facade.dto.RespObj;
 import com.lecheng.trade.facade.dto.customers.regist.GetVCodeRequest;
 import com.lecheng.trade.facade.dto.customers.regist.GetVoiceVCodeRequest;
 import com.lecheng.trade.service.customers.RegistService;
-import com.lecheng.trade.utils.HttpClientUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lecheng.trade.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,13 +16,7 @@ import org.springframework.stereotype.Service;
  * 版本: V1.0
  */
 @Service
-public class RegistServiceImpl implements RegistService {
-
-    /**
-     * http通讯客户端
-     */
-    @Autowired
-    private HttpClientUtils httpClient;
+public class RegistServiceImpl extends BaseServiceImpl implements RegistService {
 
     /**
      * 获取注册短信验证码
