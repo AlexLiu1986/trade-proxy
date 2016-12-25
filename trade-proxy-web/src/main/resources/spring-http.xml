@@ -8,4 +8,71 @@
         <property name="contentEncoding" value="utf-8"/>
         <property name="contentType" value="application/json"/>
     </bean>
+
+    <bean id="requestUrlMap" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="" value="${config.remote.host}/api/customers/regist/getvcode" />
+                <entry key="" value="${config.remote.host}/api/customers/regist/getvoicevcode" />
+                <entry key="" value="${config.remote.host}/api/customers/regist/add" />
+                <entry key="" value="${config.remote.host}/api/customers/password/getvcode" />
+                <entry key="" value="${config.remote.host}/api/customers/password/getvoicevcode" />
+                <entry key="" value="${config.remote.host}/api/customers/password/reset" />
+                <entry key="" value="${config.remote.host}/api/customers/account/login" />
+                <entry key="" value="${config.remote.host}/api/customers/account/get" />
+                <entry key="" value="${config.remote.host}/api/customers/flow/getlist" />
+                <entry key="" value="${config.remote.host}/api/customers/flow/get" />
+                <entry key="" value="${config.remote.host}/api/customers/bankcard/getlist" />
+                <entry key="" value="${config.remote.host}/api/customers/binding/getvcode" />
+                <entry key="" value="${config.remote.host}/api/customers/binding/getvoicevcode" />
+                <entry key="" value="${config.remote.host}/api/customers/binding/add" />
+                <entry key="" value="${config.remote.host}/api/customers/unbinding/getvcode" />
+                <entry key="" value="${config.remote.host}/api/customers/unbinding/getvoicevcode" />
+                <entry key="" value="${config.remote.host}/api/customers/unbinding/remove" />
+                <entry key="" value="${config.remote.host}/api/deposits/test/pay" />
+                <entry key="" value="${config.remote.host}/api/deposits/dotpay/scan" />
+                <entry key="" value="${config.remote.host}/api/deposits/dotpay/pay" />
+                <entry key="" value="${config.remote.host}/api/deposits/dotpay/apppay" />
+                <entry key="" value="${config.remote.host}/api/deposits/dotpay/verify" />
+                <entry key="" value="${config.remote.host}/api/deposits/jdpay/pay" />
+                <entry key="" value="${config.remote.host}/api/deposits/jdpay/verify" />
+                <entry key="" value="${config.remote.host}/api/deposits/yoyipay/pay" />
+                <entry key="" value="${config.remote.host}/api/deposits/yoyipay/anonymouspay" />
+                <entry key="" value="${config.remote.host}/api/deposits/yoyipay/verify" />
+                <entry key="" value="${config.remote.host}/api/deposits/easypay/pay" />
+                <entry key="" value="${config.remote.host}/api/deposits/easypay/verify" />
+                <entry key="" value="${config.remote.host}/api/deposits/hcpay/pay" />
+                <entry key="" value="${config.remote.host}/api/deposits/hcpay/verify" />
+                <entry key="" value="${config.remote.host}/api/deposits/record/getlist" />
+                <entry key="" value="${config.remote.host}/api/deposits/record/get" />
+                <entry key="" value="${config.remote.host}/api/withdraws/bankcard/cash" />
+                <entry key="" value="${config.remote.host}/api/withdraws/record/getlist" />
+                <entry key="" value="${config.remote.host}/api/withdraws/record/get" />
+                <entry key="" value="${config.remote.host}/api/trades/position/get" />
+                <entry key="" value="${config.remote.host}/api/trades/position/getlist" />
+                <entry key="" value="${config.remote.host}/api/trades/hisposition/get" />
+                <entry key="" value="${config.remote.host}/api/trades/hisposition/getlist" />
+                <entry key="" value="${config.remote.host}/api/trades/position/open" />
+                <entry key="" value="${config.remote.host}/api/trades/position/close" />
+                <entry key="" value="${config.remote.host}/api/trades/position/modify" />
+                <entry key="" value="${config.remote.host}/api/trades/position/updatelog" />
+                <entry key="" value="${config.remote.host}/api/events/coupon/getlist" />
+                <entry key="" value="${config.remote.host}/api/events/coupon/pay" />
+                <entry key="" value="${config.remote.host}/api/events/coupon/allot" />
+                <entry key="" value="${config.remote.host}/api/events/voucher/allot" />
+                <entry key="" value="${config.remote.host}/api/prices/realtime/getlist" />
+                <entry key="" value="${config.remote.host}/api/prices/kchart/get" />
+                <entry key="" value="${config.remote.host}/api/prices/timeline/get" />
+                <entry key="" value="${config.remote.host}/api/infos/goods/getlist" />
+                <entry key="" value="${config.remote.host}/api/infos/rank/getlist" />
+                <entry key="" value="${config.remote.host}/api/infos/rule/getlist" />
+                <entry key="" value="${config.remote.host}/api/infos/faq/getlist" />
+                <entry key="" value="${config.remote.host}/api/infos/notice/getlist" />
+                <entry key="" value="${config.remote.host}/api/prices/markettime/get" />
+                <entry key="" value="${config.remote.host}/api/auths/wechat/userbycode" />
+                <entry key="" value="${config.remote.host}/api/auths/wechat/userbyopenid" />
+                <entry key="" value="${config.remote.host}/api/auths/wechat/oauth2" />
+            </map>
+        </constructor-arg>
+    </bean>
 </beans>
