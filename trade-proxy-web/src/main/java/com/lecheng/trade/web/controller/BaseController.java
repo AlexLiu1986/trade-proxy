@@ -1,6 +1,7 @@
 package com.lecheng.trade.web.controller;
 
-import com.lecheng.trade.facade.dto.RespObj;
+import com.lecheng.trade.facade.constants.RespCode;
+import com.lecheng.trade.facade.dto.BaseResponse;
 import com.lecheng.trade.facade.exception.ParameterValidException;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -31,16 +32,17 @@ public class BaseController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
-    public RespObj<List<ParameterValidException>> handleException(MethodArgumentNotValidException exception) {
+    public BaseResponse handleException(MethodArgumentNotValidException exception) {
         logger.error("请求参数校验错误:" + exception.getMessage());
-        RespObj<List<ParameterValidException>> respObj = new RespObj<>(HttpStatus.BAD_REQUEST.value(), "请求参数有错误");
+        BaseResponse baseResponse = new BaseResponse(RespCode.REQUEST_PARAMS_VALID_ERROR.getValue(),
+                RespCode.REQUEST_PARAMS_VALID_ERROR.getDesc());
         if (CollectionUtils.isNotEmpty(exception.getBindingResult().getFieldErrors())) {
             List<ParameterValidException> exceptions = new ArrayList<>();
             for (FieldError e : exception.getBindingResult().getFieldErrors()) {
                 exceptions.add(new ParameterValidException(e.getField(), e.getDefaultMessage()));
             }
-            respObj.setData(exceptions);
+            baseResponse.setParameterValidExceptions(exceptions);
         }
-        return respObj;
+        return baseResponse;
     }
 }

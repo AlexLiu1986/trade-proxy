@@ -1,8 +1,6 @@
 package com.lecheng.trade.web.controller.customers;
 
 import com.lecheng.trade.facade.dto.BaseResponse;
-import com.lecheng.trade.facade.dto.ReqObj;
-import com.lecheng.trade.facade.dto.RespObj;
 import com.lecheng.trade.facade.dto.customers.account.GetAccountInfoRequest;
 import com.lecheng.trade.web.controller.BaseController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +21,7 @@ import javax.validation.Valid;
 public class AccountController extends BaseController {
 
     @RequestMapping(value = "/getAccountInfo", method = RequestMethod.POST)
-    public RespObj<BaseResponse> getAccountInfo(@Valid @RequestBody ReqObj<GetAccountInfoRequest> req) {
+    public BaseResponse getAccountInfo(@Valid @RequestBody GetAccountInfoRequest req) {
         return null;
     }
 }

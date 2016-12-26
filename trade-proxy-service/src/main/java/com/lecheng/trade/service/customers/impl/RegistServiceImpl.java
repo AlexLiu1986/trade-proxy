@@ -1,13 +1,15 @@
 package com.lecheng.trade.service.customers.impl;
 
 import com.lecheng.trade.annotation.HttpRequest;
+import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.BaseResponse;
-import com.lecheng.trade.facade.dto.ReqObj;
-import com.lecheng.trade.facade.dto.RespObj;
 import com.lecheng.trade.facade.dto.customers.regist.GetVCodeRequest;
 import com.lecheng.trade.facade.dto.customers.regist.GetVoiceVCodeRequest;
 import com.lecheng.trade.service.customers.RegistService;
 import com.lecheng.trade.service.impl.BaseServiceImpl;
+import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +22,11 @@ import org.springframework.stereotype.Service;
 public class RegistServiceImpl extends BaseServiceImpl implements RegistService {
 
     /**
+     * 日志记录器
+     */
+    private static Logger logger = LoggerFactory.getLogger(RegistServiceImpl.class);
+
+    /**
      * 获取注册短信验证码
      *
      * @param req
@@ -27,9 +34,17 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
      */
     @Override
     @HttpRequest(name = "customers/regist/getvcode")
-    public RespObj<BaseResponse> getVCode(ReqObj<GetVCodeRequest> req) {
-        httpClient.doPost(this.httpRequestUrl, "");
-        return null;
+    public BaseResponse getVCode(GetVCodeRequest req) {
+        BaseResponse response = null;
+        try {
+            String result = httpClient.doPost(this.httpRequestUrl, JSONObject.fromObject(req).toString());
+            response = new BaseResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
+            response.setRemoteResultCD(result);
+        } catch (Exception e) {
+            logger.error("获取短信验证码错误", e);
+            response = new BaseResponse(RespCode.FAIL.getValue(), RespCode.FAIL.getDesc());
+        }
+        return response;
     }
 
     /**
@@ -40,8 +55,16 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
      */
     @Override
     @HttpRequest(name = "customers/regist/getvoicevcode")
-    public RespObj<BaseResponse> getVoiceVCode(ReqObj<GetVoiceVCodeRequest> req) {
-        httpClient.doPost(this.httpRequestUrl, "");
-        return null;
+    public BaseResponse getVoiceVCode(GetVoiceVCodeRequest req) {
+        BaseResponse response = null;
+        try {
+            String result = httpClient.doPost(this.httpRequestUrl, JSONObject.fromObject(req).toString());
+            response = new BaseResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
+            response.setRemoteResultCD(result);
+        } catch (Exception e) {
+            logger.error("获取语音验证码错误", e);
+            response = new BaseResponse(RespCode.FAIL.getValue(), RespCode.FAIL.getDesc());
+        }
+        return response;
     }
 }

@@ -14,6 +14,12 @@ import java.io.Serializable;
 public class BaseRequest implements Serializable {
 
     /**
+     * 请求来源
+     */
+    @NotBlank(message = "请求来源渠道不能为空")
+    private String source;
+
+    /**
      * 防止二次提交用32位guid
      */
     @NotBlank(message = "Guid不能为空")
@@ -26,5 +32,13 @@ public class BaseRequest implements Serializable {
 
     public void setGuid(String guid) {
         this.guid = guid;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

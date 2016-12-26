@@ -1,8 +1,6 @@
 package com.lecheng.trade.service.customers;
 
 import com.lecheng.trade.facade.dto.BaseResponse;
-import com.lecheng.trade.facade.dto.ReqObj;
-import com.lecheng.trade.facade.dto.RespObj;
 import com.lecheng.trade.facade.dto.customers.regist.GetVCodeRequest;
 import com.lecheng.trade.facade.dto.customers.regist.GetVoiceVCodeRequest;
 
@@ -20,7 +18,7 @@ public interface RegistService {
      * @param req
      * @return
      */
-    RespObj<BaseResponse> getVCode(ReqObj<GetVCodeRequest> req);
+    BaseResponse getVCode(GetVCodeRequest req);
 
     /**
      * 获取注册语音验证码
@@ -28,5 +26,5 @@ public interface RegistService {
      * @param req
      * @return
      */
-    RespObj<BaseResponse> getVoiceVCode(ReqObj<GetVoiceVCodeRequest> req);
+    BaseResponse getVoiceVCode(GetVoiceVCodeRequest req);
 }

@@ -1,8 +1,6 @@
 package com.lecheng.trade.web.controller.customers;
 
 import com.lecheng.trade.facade.dto.BaseResponse;
-import com.lecheng.trade.facade.dto.ReqObj;
-import com.lecheng.trade.facade.dto.RespObj;
 import com.lecheng.trade.facade.dto.customers.regist.GetVCodeRequest;
 import com.lecheng.trade.facade.dto.customers.regist.GetVoiceVCodeRequest;
 import com.lecheng.trade.service.customers.RegistService;
@@ -38,7 +36,7 @@ public class RegistController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/getVCode", method = RequestMethod.POST)
-    public RespObj<BaseResponse> getVCode(@Valid @RequestBody ReqObj<GetVCodeRequest> req) {
+    public BaseResponse getVCode(@Valid @RequestBody GetVCodeRequest req) {
         return registService.getVCode(req);
     }
 
@@ -49,7 +47,7 @@ public class RegistController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/getVoiceVCode", method = RequestMethod.POST)
-    public RespObj<BaseResponse> getVoiceVCode(@Valid @RequestBody ReqObj<GetVoiceVCodeRequest> req) {
+    public BaseResponse getVoiceVCode(@Valid @RequestBody GetVoiceVCodeRequest req) {
         return registService.getVoiceVCode(req);
     }
 }

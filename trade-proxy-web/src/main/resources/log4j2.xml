@@ -22,9 +22,9 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="debug"> <!-- 全局配置 -->
-            <AppenderRef ref="Console"/>
-        </Root>
+        <!--        <Root level="debug"> &lt;!&ndash; 全局配置 &ndash;&gt;
+                    <AppenderRef ref="Console"/>
+                </Root>-->
         <Logger name="com.lecheng" level="debug">
             <AppenderRef ref="Console"/>
         </Logger>
