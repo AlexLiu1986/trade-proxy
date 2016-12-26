@@ -3,10 +3,13 @@ package com.lecheng.trade.service.customers.impl;
 import com.lecheng.trade.annotation.HttpRequest;
 import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.BaseResponse;
+import com.lecheng.trade.facade.dto.customers.regist.AddRequest;
+import com.lecheng.trade.facade.dto.customers.regist.AddResponse;
 import com.lecheng.trade.facade.dto.customers.regist.GetVCodeRequest;
 import com.lecheng.trade.facade.dto.customers.regist.GetVoiceVCodeRequest;
 import com.lecheng.trade.service.customers.RegistService;
 import com.lecheng.trade.service.impl.BaseServiceImpl;
+import com.lecheng.trade.utils.AesUtils;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,6 +67,28 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
         } catch (Exception e) {
             logger.error("获取语音验证码错误", e);
             response = new BaseResponse(RespCode.FAIL.getValue(), RespCode.FAIL.getDesc());
+        }
+        return response;
+    }
+
+    /**
+     * 注册
+     *
+     * @param req
+     * @return
+     */
+    @Override
+    @HttpRequest(name = "customers/regist/add")
+    public AddResponse add(AddRequest req) {
+        AddResponse response = null;
+        try {
+            //req.setHashedPassword(AesUtils.encrypt(req.getHashedPassword(), AesUtils.AesKey));
+            String result = httpClient.doPost(this.httpRequestUrl, JSONObject.fromObject(req).toString());
+            response = new AddResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
+            response.setRemoteResultCD(result);
+        } catch (Exception e) {
+            logger.error("用户注册失败", e);
+            response = new AddResponse(RespCode.FAIL.getValue(), RespCode.FAIL.getDesc());
         }
         return response;
     }
