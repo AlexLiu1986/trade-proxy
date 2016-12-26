@@ -1,5 +1,6 @@
 package com.lecheng.trade.service.customers.impl;
 
+import com.lecheng.trade.annotation.HttpRequest;
 import com.lecheng.trade.facade.dto.BaseResponse;
 import com.lecheng.trade.facade.dto.ReqObj;
 import com.lecheng.trade.facade.dto.RespObj;
@@ -25,8 +26,9 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
      * @return
      */
     @Override
+    @HttpRequest(name = "customers/regist/getvcode")
     public RespObj<BaseResponse> getVCode(ReqObj<GetVCodeRequest> req) {
-        httpClient.doPost("http://192.168.224.63:8080/sms-gateway/gateway/sendMessage", "");
+        httpClient.doPost(this.httpRequestUrl, "");
         return null;
     }
 
@@ -37,7 +39,9 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
      * @return
      */
     @Override
+    @HttpRequest(name = "customers/regist/getvoicevcode")
     public RespObj<BaseResponse> getVoiceVCode(ReqObj<GetVoiceVCodeRequest> req) {
+        httpClient.doPost(this.httpRequestUrl, "");
         return null;
     }
 }
