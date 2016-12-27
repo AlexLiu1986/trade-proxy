@@ -1,6 +1,9 @@
 package com.lecheng.trade.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 功能: JSON工具类
@@ -9,6 +12,11 @@ import net.sf.json.JSONObject;
  * 版本: V1.0
  */
 public class JsonUtils {
+
+    /**
+     * 日志记录器
+     */
+    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
     /**
      * 安全获取json内容
@@ -21,6 +29,41 @@ public class JsonUtils {
         try {
             return object.getString(key);
         } catch (Exception e) {
+            logger.error("获取String异常", e);
+            return null;
+        }
+    }
+
+    /**
+     * 安全转换bean
+     *
+     * @param object
+     * @param classType
+     * @param <T>
+     * @return
+     */
+    public static <T> T toBean(JSONObject object, Class classType) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return (T) mapper.readValue(object.toString(), classType);
+        } catch (Exception e) {
+            logger.error("JsonToBean异常", e);
+            return null;
+        }
+    }
+
+    /**
+     * 安全获取JSONObject
+     *
+     * @param object
+     * @param key
+     * @return
+     */
+    public static JSONObject getJSONObject(JSONObject object, String key) {
+        try {
+            return object.getJSONObject(key);
+        } catch (Exception e) {
+            logger.error("获取JSONObject异常", e);
             return null;
         }
     }

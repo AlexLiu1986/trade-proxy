@@ -1,6 +1,7 @@
 package com.lecheng.trade.facade.dto.customers.account;
 
 import com.lecheng.trade.facade.dto.BaseResponse;
+import com.lecheng.trade.facade.model.Customer;
 
 /**
  * 功能: 登录响应
@@ -20,6 +21,11 @@ public class LoginResponse extends BaseResponse {
      */
     private String sessionId;
 
+    /**
+     * 用户信息
+     */
+    private Customer customer;
+
     public LoginResponse() {
     }
 
@@ -33,5 +39,13 @@ public class LoginResponse extends BaseResponse {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
