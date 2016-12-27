@@ -1,5 +1,6 @@
 package com.lecheng.trade.facade.dto;
 
+import com.lecheng.trade.facade.constants.ResultCD;
 import com.lecheng.trade.facade.exception.ParameterValidException;
 import net.sf.json.JSONObject;
 
@@ -38,6 +39,11 @@ public class BaseResponse implements Serializable {
      * 远程错误消息
      */
     private String errorMsg;
+
+    /**
+     * 远程返回码是否成功
+     */
+    private boolean isResultOK = false;
 
     /**
      * 参数校验错误列表
@@ -99,10 +105,19 @@ public class BaseResponse implements Serializable {
         this.respMsg = respMsg;
     }
 
+    public boolean isResultOK() {
+        return isResultOK;
+    }
+
+    public void setIsResultOK(boolean isResultOK) {
+        this.isResultOK = isResultOK;
+    }
+
     public void setRemoteResultCD(JSONObject object) throws Exception {
         if (object != null) {
             this.resultCD = object.getString("ResultCD");
             this.errorMsg = object.getString("ErrorMsg");
+            this.isResultOK = ResultCD.SUCC.getValue().equals(this.resultCD);
         }
     }
 }

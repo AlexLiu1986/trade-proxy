@@ -2,6 +2,8 @@ package com.lecheng.trade.web.controller.customers;
 
 import com.lecheng.trade.facade.dto.customers.account.GetRequest;
 import com.lecheng.trade.facade.dto.customers.account.GetResponse;
+import com.lecheng.trade.facade.dto.customers.account.LoginRequest;
+import com.lecheng.trade.facade.dto.customers.account.LoginResponse;
 import com.lecheng.trade.service.customers.AccountService;
 import com.lecheng.trade.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,23 @@ public class AccountController extends BaseController {
     @Autowired
     private AccountService accountService;
 
+    /**
+     * 登录
+     *
+     * @param req
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public LoginResponse login(@Valid @RequestBody LoginRequest req) {
+        return accountService.login(req);
+    }
+
+    /**
+     * 获取账户信息
+     *
+     * @param req
+     * @return
+     */
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public GetResponse get(@Valid @RequestBody GetRequest req) {
         return accountService.get(req);

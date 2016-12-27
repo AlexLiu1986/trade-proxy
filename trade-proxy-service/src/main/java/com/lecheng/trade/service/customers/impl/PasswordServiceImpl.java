@@ -10,6 +10,7 @@ import com.lecheng.trade.facade.dto.customers.password.ResetResponse;
 import com.lecheng.trade.service.customers.PasswordService;
 import com.lecheng.trade.service.impl.BaseServiceImpl;
 import com.lecheng.trade.utils.AesUtils;
+import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,8 +81,8 @@ public class PasswordServiceImpl extends BaseServiceImpl implements PasswordServ
             JSONObject result = httpClient.doJsonPost(this.httpRequestUrl, JSONObject.fromObject(req).toString());
             response = new ResetResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
             response.setRemoteResultCD(result);
-            if (result != null) {
-                response.setLoginId(result.getString("LoginId"));
+            if (response.isResultOK()) {
+                response.setLoginId(JsonUtils.getString(result, "LoginId"));
             }
         } catch (Exception e) {
             logger.error("重置密码失败", e);
