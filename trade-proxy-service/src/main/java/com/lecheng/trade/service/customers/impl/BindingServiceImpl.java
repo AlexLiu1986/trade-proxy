@@ -3,13 +3,13 @@ package com.lecheng.trade.service.customers.impl;
 import com.lecheng.trade.annotation.HttpRequest;
 import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.BaseResponse;
-import com.lecheng.trade.facade.dto.customers.regist.AddRequest;
-import com.lecheng.trade.facade.dto.customers.regist.AddResponse;
-import com.lecheng.trade.facade.dto.customers.regist.GetVCodeRequest;
-import com.lecheng.trade.facade.dto.customers.regist.GetVoiceVCodeRequest;
-import com.lecheng.trade.service.customers.RegistService;
+import com.lecheng.trade.facade.dto.customers.binding.AddRequest;
+import com.lecheng.trade.facade.dto.customers.binding.AddResponse;
+import com.lecheng.trade.facade.dto.customers.binding.GetVCodeRequest;
+import com.lecheng.trade.facade.dto.customers.binding.GetVoiceVCodeRequest;
+import com.lecheng.trade.facade.model.Card;
 import com.lecheng.trade.service.BaseServiceImpl;
-import com.lecheng.trade.utils.AesUtils;
+import com.lecheng.trade.service.customers.BindingService;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -17,27 +17,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * 功能: 注册相关服务实现
+ * 功能: 绑卡相关服务实现类
  * 创建: liuchongguang
- * 日期: 2016/12/23 0023 14:17
+ * 日期: 2016/12/27 0027 18:09
  * 版本: V1.0
  */
 @Service
-public class RegistServiceImpl extends BaseServiceImpl implements RegistService {
+public class BindingServiceImpl extends BaseServiceImpl implements BindingService {
 
     /**
      * 日志记录器
      */
-    private static Logger logger = LoggerFactory.getLogger(RegistServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(BindingServiceImpl.class);
 
     /**
-     * 获取注册短信验证码
+     * 获取绑卡短信验证码
      *
      * @param req
      * @return
      */
     @Override
-    @HttpRequest(name = "customers/regist/getvcode")
+    @HttpRequest(name = "customers/binding/getvcode")
     public BaseResponse getVCode(GetVCodeRequest req) {
         BaseResponse response = null;
         try {
@@ -52,13 +52,13 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
     }
 
     /**
-     * 获取注册语音验证码
+     * 获取绑卡语音验证码
      *
      * @param req
      * @return
      */
     @Override
-    @HttpRequest(name = "customers/regist/getvoicevcode")
+    @HttpRequest(name = "customers/binding/getvoicevcode")
     public BaseResponse getVoiceVCode(GetVoiceVCodeRequest req) {
         BaseResponse response = null;
         try {
@@ -73,26 +73,24 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
     }
 
     /**
-     * 注册
+     * 绑卡
      *
      * @param req
      * @return
      */
     @Override
-    @HttpRequest(name = "customers/regist/add")
+    @HttpRequest(name = "customers/binding/add")
     public AddResponse add(AddRequest req) {
         AddResponse response = null;
         try {
-            req.setHashedPassword(AesUtils.encrypt(req.getHashedPassword(), AesUtils.AesKey));
             JSONObject result = httpClient.doJsonPost(this.httpRequestUrl, JSONObject.fromObject(req).toString());
             response = new AddResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
             response.setRemoteResultCD(result);
             if (response.isResultOK()) {
-                response.setLoginId(JsonUtils.getString(result, "LoginId"));
-                response.setCustomerId(JsonUtils.getString(result, "CustomerId"));
+                response.setCard((Card) JsonUtils.toBean(JsonUtils.getJSONObject(result, "Card"), Card.class));
             }
         } catch (Exception e) {
-            logger.error("用户注册失败", e);
+            logger.error("绑卡错误", e);
             response = new AddResponse(RespCode.FAIL.getValue(), RespCode.FAIL.getDesc());
         }
         return response;

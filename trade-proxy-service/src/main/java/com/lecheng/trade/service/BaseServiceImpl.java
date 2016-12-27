@@ -1,4 +1,4 @@
-package com.lecheng.trade.service.impl;
+package com.lecheng.trade.service;
 
 import com.lecheng.trade.utils.HttpClientUtils;
 import org.springframework.beans.factory.annotation.Autowired;

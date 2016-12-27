@@ -9,7 +9,7 @@ import com.lecheng.trade.facade.dto.customers.flow.GetResponse;
 import com.lecheng.trade.facade.model.AccountFlow;
 import com.lecheng.trade.facade.model.AccountFlowDetail;
 import com.lecheng.trade.service.customers.FlowService;
-import com.lecheng.trade.service.impl.BaseServiceImpl;
+import com.lecheng.trade.service.BaseServiceImpl;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;

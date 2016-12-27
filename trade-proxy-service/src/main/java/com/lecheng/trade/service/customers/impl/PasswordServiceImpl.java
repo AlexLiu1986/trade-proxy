@@ -8,7 +8,7 @@ import com.lecheng.trade.facade.dto.customers.password.GetVoiceVCodeRequest;
 import com.lecheng.trade.facade.dto.customers.password.ResetRequest;
 import com.lecheng.trade.facade.dto.customers.password.ResetResponse;
 import com.lecheng.trade.service.customers.PasswordService;
-import com.lecheng.trade.service.impl.BaseServiceImpl;
+import com.lecheng.trade.service.BaseServiceImpl;
 import com.lecheng.trade.utils.AesUtils;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;

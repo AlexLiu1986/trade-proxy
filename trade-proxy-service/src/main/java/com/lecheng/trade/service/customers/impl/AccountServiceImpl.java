@@ -8,7 +8,7 @@ import com.lecheng.trade.facade.dto.customers.account.LoginRequest;
 import com.lecheng.trade.facade.dto.customers.account.LoginResponse;
 import com.lecheng.trade.facade.model.Customer;
 import com.lecheng.trade.service.customers.AccountService;
-import com.lecheng.trade.service.impl.BaseServiceImpl;
+import com.lecheng.trade.service.BaseServiceImpl;
 import com.lecheng.trade.utils.AesUtils;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
