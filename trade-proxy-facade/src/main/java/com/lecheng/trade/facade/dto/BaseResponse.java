@@ -99,9 +99,10 @@ public class BaseResponse implements Serializable {
         this.respMsg = respMsg;
     }
 
-    public void setRemoteResultCD(String result) throws Exception {
-        JSONObject object = JSONObject.fromObject(result);
-        this.resultCD = object.getString("ResultCD");
-        this.errorMsg = object.getString("ErrorMsg");
+    public void setRemoteResultCD(JSONObject object) throws Exception {
+        if (object != null) {
+            this.resultCD = object.getString("ResultCD");
+            this.errorMsg = object.getString("ErrorMsg");
+        }
     }
 }

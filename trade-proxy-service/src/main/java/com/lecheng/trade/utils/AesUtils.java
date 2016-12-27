@@ -1,17 +1,15 @@
 package com.lecheng.trade.utils;
 
-//import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-import javax.crypto.*;
+import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
-import java.security.*;
+import java.security.Key;
+import java.security.Security;
 import java.util.Arrays;
 
 /**
@@ -38,7 +36,7 @@ public class AesUtils {
      * @param password 加密密码
      * @return
      */
-/*    public static String encrypt(String content, String password) {
+    public static String encrypt(String content, String password) {
         try {
             // 如果密钥不足16位，那么就补足.  这个if 中的内容很重要
             int base = 16;
@@ -62,7 +60,7 @@ public class AesUtils {
             logger.error("AesUtils加密失败", e);
         }
         return null;
-    }*/
+    }
 
     /**
      * 解密

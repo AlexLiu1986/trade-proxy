@@ -1,5 +1,6 @@
 package com.lecheng.trade.utils;
 
+import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -41,6 +42,13 @@ public class HttpClientUtils {
      */
     private String contentType = "application/json";
 
+    /**
+     * 模拟Post请求
+     *
+     * @param url
+     * @param params
+     * @return
+     */
     public String doPost(String url, String params) {
         CloseableHttpClient client = createCloseableHttpClient(url);
         try {
@@ -66,6 +74,22 @@ public class HttpClientUtils {
             } catch (Exception e) {
                 logger.error("HttpClient关闭异常", e);
             }
+        }
+        return null;
+    }
+
+    /**
+     * 模拟Post请求
+     *
+     * @param url
+     * @param params
+     * @return
+     */
+    public JSONObject doJsonPost(String url, String params) {
+        try {
+            return JSONObject.fromObject(doPost(url, params));
+        } catch (Exception e) {
+            logger.error("doJsonPost异常", e);
         }
         return null;
     }
