@@ -1,5 +1,6 @@
 package com.lecheng.trade.facade.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.Date;
  * 日期: 2016/12/27 0027 13:49
  * 版本: V1.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Customer implements Serializable {
 
     /**

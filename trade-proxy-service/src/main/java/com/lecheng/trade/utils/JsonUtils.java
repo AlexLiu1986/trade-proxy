@@ -1,9 +1,14 @@
 package com.lecheng.trade.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 功能: JSON工具类
@@ -48,6 +53,29 @@ public class JsonUtils {
             return (T) mapper.readValue(object.toString(), classType);
         } catch (Exception e) {
             logger.error("JsonToBean异常", e);
+            return null;
+        }
+    }
+
+    /**
+     * 获取bean列表
+     *
+     * @param array
+     * @param classType
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> toBeanList(JSONArray array, Class classType) {
+        try {
+            Iterator<JSONObject> it = array.iterator();
+            List<T> beanList = new ArrayList<>();
+            while (it.hasNext()) {
+                JSONObject object = it.next();
+                beanList.add((T) toBean(object, classType));
+            }
+            return beanList;
+        } catch (Exception e) {
+            logger.error("JsonToBeanList异常", e);
             return null;
         }
     }

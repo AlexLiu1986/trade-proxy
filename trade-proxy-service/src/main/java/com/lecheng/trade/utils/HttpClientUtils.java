@@ -11,7 +11,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +60,9 @@ public class HttpClientUtils {
             HttpResponse resp = client.execute(httpPost);
             if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 HttpEntity he = resp.getEntity();
-                return EntityUtils.toString(he, this.contentEncoding);
+                //return EntityUtils.toString(he, this.contentEncoding);
+                //return "{\"AccountFlowList\":[{\"ID\":10,\"FlowType\":4,\"FlowName\":\"平仓\",\"InOut\":1,\"Amount\":247.00,\"AccountBalance\":98059.30,\"FlowTime\":\"2016-08-04T09:05:41.25\",\"Comment\":null},{\"ID\":9,\"FlowType\":3,\"FlowName\":\"建仓\",\"InOut\":2,\"Amount\":274.00,\"AccountBalance\":97812.30,\"FlowTime\":\"2016-08-03T10:24:06.023\",\"Comment\":null},{\"ID\":8,\"FlowType\":4,\"FlowName\":\"平仓\",\"InOut\":1,\"Amount\":400.00,\"AccountBalance\":98086.30,\"FlowTime\":\"2016-08-03T04:15:00.743\",\"Comment\":null},{\"ID\":7,\"FlowType\":4,\"FlowName\":\"平仓\",\"InOut\":1,\"Amount\":30000.00,\"AccountBalance\":97686.30,\"FlowTime\":\"2016-08-03T04:15:00.743\",\"Comment\":null},{\"ID\":6,\"FlowType\":4,\"FlowName\":\"平仓\",\"InOut\":1,\"Amount\":8.00,\"AccountBalance\":67686.30,\"FlowTime\":\"2016-08-03T04:15:00.743\",\"Comment\":null},{\"ID\":5,\"FlowType\":4,\"FlowName\":\"平仓\",\"InOut\":1,\"Amount\":5000.00,\"AccountBalance\":67678.30,\"FlowTime\":\"2016-08-03T04:15:00.743\",\"Comment\":null},{\"ID\":4,\"FlowType\":3,\"FlowName\":\"建仓\",\"InOut\":2,\"Amount\":438.00,\"AccountBalance\":62678.30,\"FlowTime\":\"2016-08-02T18:18:47.713\",\"Comment\":null},{\"ID\":3,\"FlowType\":3,\"FlowName\":\"建仓\",\"InOut\":2,\"Amount\":31500.00,\"AccountBalance\":63116.30,\"FlowTime\":\"2016-08-02T18:17:13.527\",\"Comment\":null},{\"ID\":2,\"FlowType\":3,\"FlowName\":\"建仓\",\"InOut\":2,\"Amount\":8.70,\"AccountBalance\":94616.30,\"FlowTime\":\"2016-08-02T12:09:07.647\",\"Comment\":null},{\"ID\":1,\"FlowType\":3,\"FlowName\":\"建仓\",\"InOut\":2,\"Amount\":5375.00,\"AccountBalance\":94625.00,\"FlowTime\":\"2016-08-02T11:26:51.79\",\"Comment\":null}],\"ResultCD\":\"I001\",\"ErrorMsg\":null}\n";
+                return "{\"AccountFlowDetail\":{\"ID\":1,\"CustomerId\":3,\"FlowType\":3,\"FlowName\":\"建仓\",\"InOut\":2,\"Amount\":5375.00,\"AccountBalance\":94625.00,\"FlowTime\":\"2016-08-02T11:26:51.79\",\"Comment\":null,\"DepositType\":null,\"DepositName\":\"\",\"Bank\":null,\"CardNo\":\"\",\"Name\":null,\"Status\":0,\"WithdrawAmount\":0.0,\"WithdrawCharge\":0.0,\"GoodsName\":\"50kg吉银\",\"BuySell\":1,\"PositionAmount\":1.0,\"OpenPrice\":4000.00,\"PositionTime\":\"2016-08-02T11:26:51.79\",\"OpenCost\":5000.00,\"OpenCharge\":375.00,\"ClosePrice\":4000.0000,\"CloseTime\":\"2016-08-03T04:15:00.743\",\"CloseIncome\":5000.0000,\"CloseCharge\":0.0000,\"CloseType\":4,\"CloseTypeName\":\"收盘平仓\",\"Title\":null},\"ResultCD\":\"I001\",\"ErrorMsg\":null}\n";
             }
             return null;
         } catch (Exception e) {

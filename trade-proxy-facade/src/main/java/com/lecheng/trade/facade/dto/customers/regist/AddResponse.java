@@ -1,7 +1,6 @@
 package com.lecheng.trade.facade.dto.customers.regist;
 
 import com.lecheng.trade.facade.dto.BaseResponse;
-import net.sf.json.JSONObject;
 
 /**
  * 功能: 注册响应

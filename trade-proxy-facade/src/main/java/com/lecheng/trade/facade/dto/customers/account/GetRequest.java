@@ -1,8 +1,6 @@
 package com.lecheng.trade.facade.dto.customers.account;
 
-import com.lecheng.trade.facade.dto.BaseRequest;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
+import com.lecheng.trade.facade.dto.SessionRequest;
 
 /**
  * 功能: 获取账户信息请求
@@ -10,40 +8,10 @@ import org.hibernate.validator.constraints.NotBlank;
  * 日期: 2016/12/22 0022 15:37
  * 版本: V1.0
  */
-public class GetRequest extends BaseRequest {
+public class GetRequest extends SessionRequest {
 
     /**
      * SerialVersionUID
      */
     private static final long serialVersionUID = 2552951870909883921L;
-
-    /**
-     * 登录账号
-     */
-    @NotBlank(message = "登录账号不能为空")
-    @Length(min = 11, max = 11, message = "登录账号长度必须为11位")
-    private String loginId;
-
-    /**
-     * 会话ID
-     */
-    @NotBlank(message = "会话ID不能为空")
-    @Length(min = 1, max = 32, message = "会话ID长度不能超过32位")
-    private String sessionId;
-
-    public String getLoginId() {
-        return loginId;
-    }
-
-    public void setLoginId(String loginId) {
-        this.loginId = loginId;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
 }
