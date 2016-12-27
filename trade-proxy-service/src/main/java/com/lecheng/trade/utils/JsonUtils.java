@@ -3,10 +3,13 @@ package com.lecheng.trade.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,6 +55,60 @@ public class JsonUtils {
         } catch (Exception e) {
             logger.error("获取Int异常", e);
             return 0;
+        }
+    }
+
+    /**
+     * 安全获取json内容
+     *
+     * @param object
+     * @param key
+     * @return
+     */
+    public static long getLong(JSONObject object, String key) {
+        try {
+            return object.getLong(key);
+        } catch (Exception e) {
+            logger.error("获取Long异常", e);
+            return 0L;
+        }
+    }
+
+    /**
+     * 安全获取json内容
+     *
+     * @param object
+     * @param key
+     * @return
+     */
+    public static BigDecimal getBigDecimal(JSONObject object, String key) {
+        try {
+            return new BigDecimal(object.getString(key));
+        } catch (Exception e) {
+            logger.error("获取BigDecimal异常", e);
+            return null;
+        }
+    }
+
+    /**
+     * 安全获取json内容
+     *
+     * @param object
+     * @param key
+     * @return
+     */
+    public static Date getDate(JSONObject object, String key) {
+        try {
+            String value = getString(object, key);
+            if (StringUtils.isNotBlank(value)) {
+                value = value.replace("T", " ");
+                return DateUtils.parse(value, DateUtils.DEFAULT_TIMESTAMP_FORMAT);
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("获取Date异常", e);
+            return null;
         }
     }
 

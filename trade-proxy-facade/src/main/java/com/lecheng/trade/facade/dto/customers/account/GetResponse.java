@@ -36,7 +36,7 @@ public class GetResponse extends BaseResponse {
     /**
      * 红包有效期
      */
-    private Date couponDeadLine;
+    private Date couponDeadline;
 
     public GetResponse() {
     }
@@ -69,11 +69,11 @@ public class GetResponse extends BaseResponse {
         this.coupon = coupon;
     }
 
-    public Date getCouponDeadLine() {
-        return couponDeadLine;
+    public Date getCouponDeadline() {
+        return couponDeadline;
     }
 
-    public void setCouponDeadLine(Date couponDeadLine) {
-        this.couponDeadLine = couponDeadLine;
+    public void setCouponDeadline(Date couponDeadline) {
+        this.couponDeadline = couponDeadline;
     }
 }

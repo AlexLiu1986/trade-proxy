@@ -12,12 +12,9 @@ import com.lecheng.trade.service.customers.AccountService;
 import com.lecheng.trade.utils.AesUtils;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 /**
  * 功能: 账户服务实现类
@@ -75,11 +72,9 @@ public class AccountServiceImpl extends BaseServiceImpl implements AccountServic
             response.setRemoteResultCD(result);
             if (response.isResultOK()) {
                 response.setLoginId(JsonUtils.getString(result, "LoginId"));
-                String balance = JsonUtils.getString(result, "Balance");
-                String coupon = JsonUtils.getString(result, "Coupon");
-                String couponDeadLine = JsonUtils.getString(result, "CouponDeadLine");
-                if (StringUtils.isNotBlank(balance)) response.setBalance(new BigDecimal(balance));
-                if (StringUtils.isNotBlank(coupon)) response.setCoupon(new BigDecimal(coupon));
+                response.setBalance(JsonUtils.getBigDecimal(result, "Balance"));
+                response.setCoupon(JsonUtils.getBigDecimal(result, "Coupon"));
+                response.setCouponDeadline(JsonUtils.getDate(result, "CouponDeadline"));
             }
         } catch (Exception e) {
             logger.error("查询账户信息失败", e);
