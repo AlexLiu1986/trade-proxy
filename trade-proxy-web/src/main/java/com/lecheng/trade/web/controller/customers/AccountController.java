@@ -1,8 +1,10 @@
 package com.lecheng.trade.web.controller.customers;
 
-import com.lecheng.trade.facade.dto.BaseResponse;
-import com.lecheng.trade.facade.dto.customers.account.GetAccountInfoRequest;
+import com.lecheng.trade.facade.dto.customers.account.GetRequest;
+import com.lecheng.trade.facade.dto.customers.account.GetResponse;
+import com.lecheng.trade.service.customers.AccountService;
 import com.lecheng.trade.web.controller.BaseController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +22,14 @@ import javax.validation.Valid;
 @RequestMapping("/customers/account")
 public class AccountController extends BaseController {
 
-    @RequestMapping(value = "/getAccountInfo", method = RequestMethod.POST)
-    public BaseResponse getAccountInfo(@Valid @RequestBody GetAccountInfoRequest req) {
-        return null;
+    /**
+     * 账户服务
+     */
+    @Autowired
+    private AccountService accountService;
+
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    public GetResponse get(@Valid @RequestBody GetRequest req) {
+        return accountService.get(req);
     }
 }

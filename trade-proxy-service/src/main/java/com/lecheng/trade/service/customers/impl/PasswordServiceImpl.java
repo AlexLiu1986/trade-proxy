@@ -13,6 +13,7 @@ import com.lecheng.trade.utils.AesUtils;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * 功能: 密码相关服务实现
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
  * 日期: 2016/12/27 0027 09:19
  * 版本: V1.0
  */
+@Service
 public class PasswordServiceImpl extends BaseServiceImpl implements PasswordService {
 
     /**

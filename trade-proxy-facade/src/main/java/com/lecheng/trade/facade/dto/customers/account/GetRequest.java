@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * 日期: 2016/12/22 0022 15:37
  * 版本: V1.0
  */
-public class GetAccountInfoRequest extends BaseRequest {
+public class GetRequest extends BaseRequest {
 
     /**
      * SerialVersionUID
@@ -21,7 +21,7 @@ public class GetAccountInfoRequest extends BaseRequest {
      * 登录账号
      */
     @NotBlank(message = "登录账号不能为空")
-    @Length(min = 1, max = 11, message = "登录账号长度不能超过11位")
+    @Length(min = 11, max = 11, message = "登录账号长度必须为11位")
     private String loginId;
 
     /**
