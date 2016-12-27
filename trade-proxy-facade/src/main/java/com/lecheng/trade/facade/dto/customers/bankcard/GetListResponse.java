@@ -1,7 +1,6 @@
 package com.lecheng.trade.facade.dto.customers.bankcard;
 
 import com.lecheng.trade.facade.dto.BaseResponse;
-import com.lecheng.trade.facade.model.AccountFlow;
 import com.lecheng.trade.facade.model.Card;
 
 import java.util.List;

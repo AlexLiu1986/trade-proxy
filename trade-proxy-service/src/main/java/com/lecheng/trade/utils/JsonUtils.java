@@ -40,6 +40,22 @@ public class JsonUtils {
     }
 
     /**
+     * 安全获取json内容
+     *
+     * @param object
+     * @param key
+     * @return
+     */
+    public static int getInt(JSONObject object, String key) {
+        try {
+            return object.getInt(key);
+        } catch (Exception e) {
+            logger.error("获取Int异常", e);
+            return 0;
+        }
+    }
+
+    /**
      * 安全转换bean
      *
      * @param object
