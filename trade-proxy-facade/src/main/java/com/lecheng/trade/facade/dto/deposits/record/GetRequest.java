@@ -22,4 +22,12 @@ public class GetRequest extends SessionRequest {
      */
     @Min(value = 1, message = "充值订单流水号不能为空")
     private long depositID;
+
+    public long getDepositID() {
+        return depositID;
+    }
+
+    public void setDepositID(long depositID) {
+        this.depositID = depositID;
+    }
 }
