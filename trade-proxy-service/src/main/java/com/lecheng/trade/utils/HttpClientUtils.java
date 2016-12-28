@@ -1,14 +1,19 @@
 package com.lecheng.trade.utils;
 
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
@@ -18,6 +23,10 @@ import org.slf4j.LoggerFactory;
 import javax.net.ssl.SSLContext;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 功能: http请求工具类
@@ -81,6 +90,69 @@ public class HttpClientUtils {
     }
 
     /**
+     * 模拟Get请求
+     *
+     * @param url
+     * @param params
+     * @return
+     */
+    public String doGet(String url, String params) {
+        CloseableHttpClient client = createCloseableHttpClient(url);
+        try {
+            if (StringUtils.isNotBlank(params)) {
+                url += "?" + params;
+            }
+            HttpGet httpGet = new HttpGet(url);
+            httpGet.addHeader("Connection", "Keep-Alive");
+            httpGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
+            httpGet.addHeader("Cookie", "");
+
+            HttpResponse resp = client.execute(httpGet);
+            if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                HttpEntity he = resp.getEntity();
+                return EntityUtils.toString(he, this.contentEncoding);
+            }
+            return null;
+        } catch (Exception e) {
+            logger.error("HttpClientUtils doGet异常", e);
+        } finally {
+            try {
+                if (client != null) {
+                    client.close();
+                }
+            } catch (Exception e) {
+                logger.error("HttpClient关闭异常", e);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 模拟Get请求
+     *
+     * @param url
+     * @param paramMap
+     * @return
+     */
+    public String doGet(String url, Map<String, String> paramMap) {
+        try {
+            String paramStr = "";
+            if (paramMap != null) {
+                //封装请求参数
+                List<NameValuePair> params = new ArrayList<>();
+                for (String key : paramMap.keySet()) {
+                    params.add(new BasicNameValuePair(key, paramMap.get(key)));
+                }
+                paramStr = EntityUtils.toString(new UrlEncodedFormEntity(params, this.contentEncoding));
+            }
+            return doGet(url, paramStr);
+        } catch (Exception e) {
+            logger.error("HttpClientUtils doGet异常", e);
+        }
+        return null;
+    }
+
+    /**
      * 模拟Post请求
      *
      * @param url
@@ -95,6 +167,39 @@ public class HttpClientUtils {
         }
         return null;
     }
+
+    /**
+     * 模拟Get请求
+     *
+     * @param url
+     * @param params
+     * @return
+     */
+    public JSONObject doJsonGet(String url, String params) {
+        try {
+            return JSONObject.fromObject(doGet(url, params));
+        } catch (Exception e) {
+            logger.error("doJsonGet异常", e);
+        }
+        return null;
+    }
+
+    /**
+     * 模拟Get请求
+     *
+     * @param url
+     * @param paramMap
+     * @return
+     */
+    public JSONObject doJsonGet(String url, Map<String, String> paramMap) {
+        try {
+            return JSONObject.fromObject(doGet(url, paramMap));
+        } catch (Exception e) {
+            logger.error("doJsonGet异常", e);
+        }
+        return null;
+    }
+
 
     /**
      * 创建HttpClient
