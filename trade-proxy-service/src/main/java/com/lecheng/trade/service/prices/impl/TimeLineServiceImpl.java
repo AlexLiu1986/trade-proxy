@@ -2,11 +2,11 @@ package com.lecheng.trade.service.prices.impl;
 
 import com.lecheng.trade.annotation.HttpRequest;
 import com.lecheng.trade.facade.constants.RespCode;
-import com.lecheng.trade.facade.dto.prices.kchart.GetRequest;
-import com.lecheng.trade.facade.dto.prices.kchart.GetResponse;
+import com.lecheng.trade.facade.dto.prices.timeline.GetRequest;
+import com.lecheng.trade.facade.dto.prices.timeline.GetResponse;
 import com.lecheng.trade.facade.model.PriceKChart;
 import com.lecheng.trade.service.BaseServiceImpl;
-import com.lecheng.trade.service.prices.KChartService;
+import com.lecheng.trade.service.prices.TimeLineService;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -19,33 +19,32 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 功能: K线服务实现
+ * 功能: 分时线服务实现
  * 创建: liuchongguang
- * 日期: 2016/12/29 0029 11:55
+ * 日期: 2016/12/29 0029 13:43
  * 版本: V1.0
  */
 @Service
-public class KChartServiceImpl extends BaseServiceImpl implements KChartService {
+public class TimeLineServiceImpl extends BaseServiceImpl implements TimeLineService {
 
     /**
      * 日志记录器
      */
-    private static Logger logger = LoggerFactory.getLogger(KChartServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(TimeLineServiceImpl.class);
 
     /**
-     * 查询K线
+     * 查询分时线
      *
      * @param req
      * @return
      */
     @Override
-    @HttpRequest(name = "prices/kchart/get")
+    @HttpRequest(name = "prices/timeline/get")
     public GetResponse get(GetRequest req) {
         GetResponse response = null;
         try {
             HashMap<String, String> paramMap = new HashMap<>();
             if (StringUtils.isNotBlank(req.getGoodsType())) paramMap.put("goodsType", req.getGoodsType());
-            paramMap.put("chartType", String.valueOf(req.getChartType()));
             JSONObject result = httpClient.doJsonGet(this.httpRequestUrl, paramMap);
             response = new GetResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
             JSONArray arrays = JsonUtils.getJSONArray(result, "PriceItemList");
@@ -54,7 +53,7 @@ public class KChartServiceImpl extends BaseServiceImpl implements KChartService 
                 response.setPriceItemList(priceItemList);
             }
         } catch (Exception e) {
-            logger.error("查询K线数据失败", e);
+            logger.error("查询分时线数据失败", e);
             response = new GetResponse(RespCode.FAIL.getValue(), RespCode.FAIL.getDesc());
         }
         return response;

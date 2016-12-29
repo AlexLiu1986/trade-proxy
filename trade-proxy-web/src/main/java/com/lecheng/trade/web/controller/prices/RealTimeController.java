@@ -1,5 +1,6 @@
 package com.lecheng.trade.web.controller.prices;
 
+import com.lecheng.trade.facade.dto.prices.realtime.GetListRequest;
 import com.lecheng.trade.facade.dto.prices.realtime.GetListResponse;
 import com.lecheng.trade.service.prices.RealTimeService;
 import com.lecheng.trade.web.controller.BaseController;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.jws.WebParam;
+import javax.validation.Valid;
 
 /**
  * 功能: 提供Restful风格接口
@@ -29,11 +30,11 @@ public class RealTimeController extends BaseController {
     /**
      * 查询报价
      *
-     * @param goodsType
+     * @param req
      * @return
      */
     @RequestMapping(value = "/getlist", method = RequestMethod.GET)
-    public GetListResponse getList(@WebParam String goodsType) {
-        return realTimeService.getList(goodsType);
+    public GetListResponse getList(@Valid GetListRequest req) {
+        return realTimeService.getList(req);
     }
 }

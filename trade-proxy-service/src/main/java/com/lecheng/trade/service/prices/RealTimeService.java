@@ -1,5 +1,6 @@
 package com.lecheng.trade.service.prices;
 
+import com.lecheng.trade.facade.dto.prices.realtime.GetListRequest;
 import com.lecheng.trade.facade.dto.prices.realtime.GetListResponse;
 
 /**
@@ -13,8 +14,8 @@ public interface RealTimeService {
     /**
      * 查询报价
      *
-     * @param goodsType
+     * @param req
      * @return
      */
-    GetListResponse getList(String goodsType);
+    GetListResponse getList(GetListRequest req);
 }

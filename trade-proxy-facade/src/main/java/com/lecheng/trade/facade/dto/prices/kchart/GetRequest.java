@@ -1,5 +1,8 @@
 package com.lecheng.trade.facade.dto.prices.kchart;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
+
 import java.io.Serializable;
 
 /**
@@ -18,11 +21,13 @@ public class GetRequest implements Serializable {
     /**
      * 商品类型
      */
+    @NotBlank(message = "商品类型不能为空")
     private String goodsType;
 
     /**
      * K线类型,包括：1-1分钟K线，2-5分K线，3-15分K线，4-30分K线，5-60分K线，5-日K线
      */
+    @Range(min = 1, max = 5, message = "K线类型不正确")
     private int chartType;
 
     public String getGoodsType() {

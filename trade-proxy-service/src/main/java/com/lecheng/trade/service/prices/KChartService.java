@@ -1,5 +1,6 @@
 package com.lecheng.trade.service.prices;
 
+import com.lecheng.trade.facade.dto.prices.kchart.GetRequest;
 import com.lecheng.trade.facade.dto.prices.kchart.GetResponse;
 
 /**
@@ -13,9 +14,8 @@ public interface KChartService {
     /**
      * 获取K线数据
      *
-     * @param goodsType
-     * @param chartType
+     * @param req
      * @return
      */
-    GetResponse get(String goodsType, String chartType);
+    GetResponse get(GetRequest req);
 }

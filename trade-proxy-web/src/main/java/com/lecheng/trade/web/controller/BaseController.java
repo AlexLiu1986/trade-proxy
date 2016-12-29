@@ -7,6 +7,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,6 +34,23 @@ public class BaseController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     public BaseResponse handleException(MethodArgumentNotValidException exception) {
+        logger.error("请求参数校验错误:" + exception.getMessage());
+        BaseResponse baseResponse = new BaseResponse(RespCode.REQUEST_PARAMS_VALID_ERROR.getValue(),
+                RespCode.REQUEST_PARAMS_VALID_ERROR.getDesc());
+        if (CollectionUtils.isNotEmpty(exception.getBindingResult().getFieldErrors())) {
+            List<ParameterValidException> exceptions = new ArrayList<>();
+            for (FieldError e : exception.getBindingResult().getFieldErrors()) {
+                exceptions.add(new ParameterValidException(e.getField(), e.getDefaultMessage()));
+            }
+            baseResponse.setParameterValidExceptions(exceptions);
+        }
+        return baseResponse;
+    }
+
+    @ExceptionHandler(BindException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public BaseResponse handleException(BindException exception) {
         logger.error("请求参数校验错误:" + exception.getMessage());
         BaseResponse baseResponse = new BaseResponse(RespCode.REQUEST_PARAMS_VALID_ERROR.getValue(),
                 RespCode.REQUEST_PARAMS_VALID_ERROR.getDesc());

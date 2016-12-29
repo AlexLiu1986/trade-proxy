@@ -2,6 +2,7 @@ package com.lecheng.trade.service.prices.impl;
 
 import com.lecheng.trade.annotation.HttpRequest;
 import com.lecheng.trade.facade.constants.RespCode;
+import com.lecheng.trade.facade.dto.prices.realtime.GetListRequest;
 import com.lecheng.trade.facade.dto.prices.realtime.GetListResponse;
 import com.lecheng.trade.facade.model.Price;
 import com.lecheng.trade.service.BaseServiceImpl;
@@ -34,16 +35,16 @@ public class RealTimeServiceImpl extends BaseServiceImpl implements RealTimeServ
     /**
      * 查询报价
      *
-     * @param goodsType
+     * @param req
      * @return
      */
     @Override
     @HttpRequest(name = "prices/realtime/getlist")
-    public GetListResponse getList(String goodsType) {
+    public GetListResponse getList(GetListRequest req) {
         GetListResponse response = null;
         try {
             HashMap<String, String> paramMap = new HashMap<>();
-            if (StringUtils.isNotBlank(goodsType)) paramMap.put("goodsType", goodsType);
+            if (StringUtils.isNotBlank(req.getGoodsType())) paramMap.put("goodsType", req.getGoodsType());
             JSONObject result = httpClient.doJsonGet(this.httpRequestUrl, paramMap);
             response = new GetListResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
             JSONArray arrays = JsonUtils.getJSONArray(result, "PriceList");
