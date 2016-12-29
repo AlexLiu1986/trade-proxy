@@ -18,7 +18,7 @@ import javax.jws.WebParam;
  */
 @RestController
 @RequestMapping("/prices/realtime")
-public class RealtimeController1 extends BaseController {
+public class RealTimeController extends BaseController {
 
     /**
      * 报价服务
