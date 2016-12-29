@@ -11,7 +11,7 @@ import com.lecheng.trade.facade.dto.withdraws.record.GetResponse;
  * 日期: 2016/12/28 0028 10:54
  * 版本: V1.0
  */
-public interface RecordService {
+public interface WithdrawRecordService {
 
     /**
      * 查询提现记录列表

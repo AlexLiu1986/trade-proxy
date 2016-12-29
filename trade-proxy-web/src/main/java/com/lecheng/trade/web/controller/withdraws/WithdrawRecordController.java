@@ -4,7 +4,7 @@ import com.lecheng.trade.facade.dto.withdraws.record.GetListRequest;
 import com.lecheng.trade.facade.dto.withdraws.record.GetListResponse;
 import com.lecheng.trade.facade.dto.withdraws.record.GetRequest;
 import com.lecheng.trade.facade.dto.withdraws.record.GetResponse;
-import com.lecheng.trade.service.withdraws.RecordService;
+import com.lecheng.trade.service.withdraws.WithdrawRecordService;
 import com.lecheng.trade.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,13 +22,13 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/withdraws/record")
-public class RecordController extends BaseController {
+public class WithdrawRecordController extends BaseController {
 
     /**
      * 提现记录服务
      */
     @Autowired
-    private RecordService recordService;
+    private WithdrawRecordService withdrawRecordService;
 
     /**
      * 查询提现记录列表
@@ -38,7 +38,7 @@ public class RecordController extends BaseController {
      */
     @RequestMapping(value = "/getlist", method = RequestMethod.POST)
     public GetListResponse getList(@Valid @RequestBody GetListRequest req) {
-        return recordService.getList(req);
+        return withdrawRecordService.getList(req);
     }
 
     /**
@@ -49,6 +49,6 @@ public class RecordController extends BaseController {
      */
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public GetResponse getList(@Valid @RequestBody GetRequest req) {
-        return recordService.get(req);
+        return withdrawRecordService.get(req);
     }
 }

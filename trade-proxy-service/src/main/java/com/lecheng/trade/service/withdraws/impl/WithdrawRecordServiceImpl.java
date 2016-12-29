@@ -8,7 +8,7 @@ import com.lecheng.trade.facade.dto.withdraws.record.GetRequest;
 import com.lecheng.trade.facade.dto.withdraws.record.GetResponse;
 import com.lecheng.trade.facade.model.Withdraw;
 import com.lecheng.trade.service.BaseServiceImpl;
-import com.lecheng.trade.service.withdraws.RecordService;
+import com.lecheng.trade.service.withdraws.WithdrawRecordService;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -24,12 +24,12 @@ import java.util.List;
  * 版本: V1.0
  */
 @Service
-public class RecordServiceImpl extends BaseServiceImpl implements RecordService {
+public class WithdrawRecordServiceImpl extends BaseServiceImpl implements WithdrawRecordService {
 
     /**
      * 日志记录器
      */
-    private static Logger logger = LoggerFactory.getLogger(RecordServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(WithdrawRecordServiceImpl.class);
 
     /**
      * 查询提现记录列表

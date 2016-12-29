@@ -9,7 +9,7 @@ import com.lecheng.trade.facade.dto.withdraws.cash.CashResponse;
  * 日期: 2016/12/28 0028 09:21
  * 版本: V1.0
  */
-public interface BankCardService {
+public interface CashBankCardService {
 
     /**
      * 银行卡提现

@@ -5,7 +5,7 @@ import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.withdraws.cash.CashRequest;
 import com.lecheng.trade.facade.dto.withdraws.cash.CashResponse;
 import com.lecheng.trade.service.BaseServiceImpl;
-import com.lecheng.trade.service.withdraws.BankCardService;
+import com.lecheng.trade.service.withdraws.CashBankCardService;
 import com.lecheng.trade.utils.AesUtils;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
@@ -20,12 +20,12 @@ import org.springframework.stereotype.Service;
  * 版本: V1.0
  */
 @Service
-public class BankCardServiceImpl extends BaseServiceImpl implements BankCardService {
+public class CashBankCardServiceImpl extends BaseServiceImpl implements CashBankCardService {
 
     /**
      * 日志记录器
      */
-    private static Logger logger = LoggerFactory.getLogger(BankCardServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(CashBankCardServiceImpl.class);
 
     /**
      * 银行卡提现

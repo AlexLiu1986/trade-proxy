@@ -2,7 +2,7 @@ package com.lecheng.trade.web.controller.withdraws;
 
 import com.lecheng.trade.facade.dto.withdraws.cash.CashRequest;
 import com.lecheng.trade.facade.dto.withdraws.cash.CashResponse;
-import com.lecheng.trade.service.withdraws.BankCardService;
+import com.lecheng.trade.service.withdraws.CashBankCardService;
 import com.lecheng.trade.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +20,13 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/withdraws/bankcard")
-public class BankCardController extends BaseController {
+public class CashBankCardController extends BaseController {
 
+    /**
+     * 银行卡服务
+     */
     @Autowired
-    private BankCardService bankCardService;
+    private CashBankCardService cashBankCardService;
 
     /**
      * 银行卡提现
@@ -33,6 +36,6 @@ public class BankCardController extends BaseController {
      */
     @RequestMapping(value = "/cash", method = RequestMethod.POST)
     public CashResponse cash(@Valid @RequestBody CashRequest req) {
-        return bankCardService.cash(req);
+        return cashBankCardService.cash(req);
     }
 }
