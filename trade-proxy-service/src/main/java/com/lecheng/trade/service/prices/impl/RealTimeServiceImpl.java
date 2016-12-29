@@ -46,7 +46,7 @@ public class RealTimeServiceImpl extends BaseServiceImpl implements RealTimeServ
             if (StringUtils.isNotBlank(goodsType)) paramMap.put("goodsType", goodsType);
             JSONObject result = httpClient.doJsonGet(this.httpRequestUrl, paramMap);
             response = new GetListResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
-            JSONArray arrays = result.getJSONArray("PriceList");
+            JSONArray arrays = JsonUtils.getJSONArray(result, "PriceList");
             if (arrays != null) {
                 List<Price> priceList = JsonUtils.toBeanList(arrays, Price.class);
                 response.setPriceList(priceList);

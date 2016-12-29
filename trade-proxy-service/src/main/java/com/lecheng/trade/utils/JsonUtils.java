@@ -168,4 +168,20 @@ public class JsonUtils {
             return null;
         }
     }
+
+    /**
+     * 安全获取JSONArray
+     *
+     * @param object
+     * @param key
+     * @return
+     */
+    public static JSONArray getJSONArray(JSONObject object, String key) {
+        try {
+            return object.getJSONArray(key);
+        } catch (Exception e) {
+            logger.error("获取JSONArray异常", e);
+            return null;
+        }
+    }
 }
