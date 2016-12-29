@@ -113,6 +113,28 @@ public class JsonUtils {
     }
 
     /**
+     * 安全获取json内容
+     *
+     * @param object
+     * @param key
+     * @return
+     */
+    public static Date getDate(JSONObject object, String key, String format) {
+        try {
+            String value = getString(object, key);
+            if (StringUtils.isNotBlank(value)) {
+                value = value.replace("T", " ");
+                return DateUtils.parse(value, format);
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("获取Date异常", e);
+            return null;
+        }
+    }
+
+    /**
      * 安全转换bean
      *
      * @param object
