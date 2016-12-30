@@ -1,8 +1,8 @@
 package com.lecheng.trade.web.controller.prices;
 
-import com.lecheng.trade.service.prices.MarketTimeService;
-import com.lecheng.trade.facade.dto.prices.markettime.GetResponse;
 import com.lecheng.trade.facade.dto.prices.markettime.GetRequest;
+import com.lecheng.trade.facade.dto.prices.markettime.GetResponse;
+import com.lecheng.trade.service.prices.MarketTimeService;
 import com.lecheng.trade.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
