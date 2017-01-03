@@ -1,6 +1,8 @@
 package com.lecheng.trade.service.customers.impl;
 
 import com.lecheng.trade.annotation.HttpRequest;
+import com.lecheng.trade.dao.mapper.MemberMapper;
+import com.lecheng.trade.dao.model.MemberDo;
 import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.BaseResponse;
 import com.lecheng.trade.facade.dto.customers.regist.AddRequest;
@@ -12,8 +14,10 @@ import com.lecheng.trade.service.customers.RegistService;
 import com.lecheng.trade.utils.AesUtils;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,6 +33,12 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
      * 日志记录器
      */
     private static Logger logger = LoggerFactory.getLogger(RegistServiceImpl.class);
+
+    /**
+     * 会员信息数据访问接口
+     */
+    @Autowired
+    private MemberMapper memberMapper;
 
     /**
      * 获取注册短信验证码
@@ -90,6 +100,16 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
             if (response.isResultOK()) {
                 response.setLoginId(JsonUtils.getString(result, "LoginId"));
                 response.setCustomerId(JsonUtils.getString(result, "CustomerId"));
+
+                try {
+                    //保存数据库
+                    MemberDo memberDo = new MemberDo();
+                    PropertyUtils.copyProperties(memberDo, req);
+                    PropertyUtils.copyProperties(memberDo, response);
+                    memberMapper.insert(memberDo);
+                } catch (Exception ne) {
+                    logger.error("用户注册成功,保存数据库失败", ne);
+                }
             }
         } catch (Exception e) {
             logger.error("用户注册失败", e);
