@@ -2,6 +2,7 @@ package com.lecheng.trade.annotation.impl;
 
 import com.lecheng.trade.annotation.HttpRequest;
 import com.lecheng.trade.utils.SpringContextUtils;
+import net.sf.json.JSONObject;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -47,7 +48,18 @@ public class HttpRequestAdvice {
                 Method m = target.getClass().getMethod("setHttpRequestUrl", String.class);
                 m.invoke(target, url);
             }
+            logger.debug("执行方法:" + method.getName());
+            Object[] args = pjp.getArgs();
+            if (args != null) {
+                if (args.length > 0) {
+                    for (int i = 0; i < args.length; i++) {
+                        Object obj = args[i];
+                        logger.debug("参数" + i + ":" + JSONObject.fromObject(obj).toString());
+                    }
+                }
+            }
             object = pjp.proceed();
+            logger.debug("返回值:" + JSONObject.fromObject(object).toString());
         } catch (Throwable e) {
             logger.error("HttpRequestAdvice.around异常", e);
         }
