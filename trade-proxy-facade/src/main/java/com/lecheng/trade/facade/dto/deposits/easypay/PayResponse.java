@@ -1,13 +1,13 @@
-package com.lecheng.trade.facade.dto.deposits.yoyipay;
+package com.lecheng.trade.facade.dto.deposits.easypay;
 
 import com.lecheng.trade.facade.dto.BaseResponse;
-import com.lecheng.trade.facade.model.YoyiPay;
+import com.lecheng.trade.facade.model.EasyPay;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 功能: 甬易充值响应
+ * 功能: 易生充值响应
  * 创建: liuchongguang
  * 日期: 2017/1/3 0003 11:48
  * 版本: V1.0
@@ -17,7 +17,7 @@ public class PayResponse extends BaseResponse {
     /**
      * SerialVersionUID
      */
-    private static final long serialVersionUID = -5680551393055871813L;
+    private static final long serialVersionUID = 3466905084144902303L;
 
     /**
      * 充值订单流水
@@ -35,9 +35,9 @@ public class PayResponse extends BaseResponse {
     private BigDecimal amount;
 
     /**
-     * 甬易返回信息
+     * 易生返回信息
      */
-    private YoyiPay yoyiPay;
+    private EasyPay easyPay;
 
     public PayResponse() {
     }
@@ -70,11 +70,11 @@ public class PayResponse extends BaseResponse {
         this.amount = amount;
     }
 
-    public YoyiPay getYoyiPay() {
-        return yoyiPay;
+    public EasyPay getEasyPay() {
+        return easyPay;
     }
 
-    public void setYoyiPay(YoyiPay yoyiPay) {
-        this.yoyiPay = yoyiPay;
+    public void setEasyPay(EasyPay easyPay) {
+        this.easyPay = easyPay;
     }
 }
