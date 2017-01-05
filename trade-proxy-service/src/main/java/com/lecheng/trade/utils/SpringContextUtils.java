@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * 功能: Spring Bean工具类
- * 创建: liuchongguang - liuchongguang@zillionfortune.com
+ * 创建: liuchongguang
  * 日期: 2016/12/16 0016 09:25
  * 版本: V1.0
  */

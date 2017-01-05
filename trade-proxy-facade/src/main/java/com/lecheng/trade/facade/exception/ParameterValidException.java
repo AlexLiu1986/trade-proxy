@@ -3,8 +3,8 @@ package com.lecheng.trade.facade.exception;
 import java.io.Serializable;
 
 /**
- * 功能:
- * 创建: liuchongguang - liuchongguang@zillionfortune.com
+ * 功能: 参加校验异常
+ * 创建: liuchongguang
  * 日期: 2016/12/22 0022 17:32
  * 版本: V1.0
  */
