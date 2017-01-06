@@ -3,7 +3,6 @@ package com.lecheng.trade.service.customers.impl;
 import com.lecheng.trade.annotation.HttpRequest;
 import com.lecheng.trade.dao.mapper.TradeBankCardMapper;
 import com.lecheng.trade.dao.model.TradeBankCardDo;
-import com.lecheng.trade.dao.model.TradeCustomerDo;
 import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.BaseResponse;
 import com.lecheng.trade.facade.dto.customers.unbinding.GetVCodeRequest;
