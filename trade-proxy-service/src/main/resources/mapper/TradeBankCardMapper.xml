@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lecheng.trade.dao.mapper.TradeBankCardMapper">
+    <resultMap id="BaseResultMap" type="com.lecheng.trade.dao.model.TradeBankCardDo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="customer_id" property="customerId" jdbcType="INTEGER"/>
+        <result column="bank_card_id" property="bankCardId" jdbcType="INTEGER"/>
+        <result column="bank" property="bank" jdbcType="VARCHAR"/>
+        <result column="branch_bank" property="branchBank" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="card_no" property="cardNo" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, customer_id, bank_card_id, bank, branch_bank, province, city, card_no, name,
+        create_time, update_time
+    </sql>
+
+    <sql id="Select_SQL">
+        select
+        <include refid="Base_Column_List"/>
+        from trade_bank_card
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="customerId != null">
+                and customer_id = #{customerId,jdbcType=INTEGER}
+            </if>
+            <if test="bankCardId != null">
+                and bank_card_id = #{bankCardId,jdbcType=INTEGER}
+            </if>
+            <if test="bank != null">
+                and bank = #{bank,jdbcType=VARCHAR}
+            </if>
+            <if test="branchBank != null">
+                and branch_bank = #{branchBank,jdbcType=VARCHAR}
+            </if>
+            <if test="province != null">
+                and province = #{province,jdbcType=VARCHAR}
+            </if>
+            <if test="city != null">
+                and city = #{city,jdbcType=VARCHAR}
+            </if>
+            <if test="cardNo != null">
+                and card_no = #{cardNo,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="com.lecheng.trade.dao.model.TradeBankCardDo">
+        <include refid="Select_SQL"/>
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="com.lecheng.trade.dao.model.TradeBankCardDo">
+        <include refid="Select_SQL"/>
+    </select>
+
+    <select id="selectByMap" resultMap="BaseResultMap" parameterType="map">
+        <include refid="Select_SQL"/>
+    </select>
+
+    <select id="selectListByMap" resultMap="BaseResultMap" parameterType="map">
+        <include refid="Select_SQL"/>
+    </select>
+
+    <insert id="insert" parameterType="com.lecheng.trade.dao.model.TradeBankCardDo">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into trade_bank_card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="bankCardId != null">
+                bank_card_id,
+            </if>
+            <if test="bank != null">
+                bank,
+            </if>
+            <if test="branchBank != null">
+                branch_bank,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="cardNo != null">
+                card_no,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="bankCardId != null">
+                #{bankCardId,jdbcType=INTEGER},
+            </if>
+            <if test="bank != null">
+                #{bank,jdbcType=VARCHAR},
+            </if>
+            <if test="branchBank != null">
+                #{branchBank,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNo != null">
+                #{cardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from trade_bank_card
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+</mapper>

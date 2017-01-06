@@ -1,12 +1,15 @@
 package com.lecheng.trade.dao.model;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * 功能: 会员数据持久类
  * 创建: liuchongguang
  * 日期: 2017/1/3 0003 13:46
  * 版本: V1.0
  */
-public class MemberDo extends BaseDo {
+public class TradeCustomerDo extends BaseDo {
 
     /**
      * 手机号码
@@ -46,7 +49,22 @@ public class MemberDo extends BaseDo {
     /**
      * 客户ID
      */
-    private String customerId;
+    private Integer customerId;
+
+    /**
+     * 账户现金余额
+     */
+    private BigDecimal balance;
+
+    /**
+     * 账户红包余额
+     */
+    private BigDecimal coupon;
+
+    /**
+     * 红包有效期
+     */
+    private Date couponDeadline;
 
     public String getMobile() {
         return mobile;
@@ -104,11 +122,35 @@ public class MemberDo extends BaseDo {
         this.loginId = loginId;
     }
 
-    public String getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public BigDecimal getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(BigDecimal coupon) {
+        this.coupon = coupon;
+    }
+
+    public Date getCouponDeadline() {
+        return couponDeadline;
+    }
+
+    public void setCouponDeadline(Date couponDeadline) {
+        this.couponDeadline = couponDeadline;
     }
 }

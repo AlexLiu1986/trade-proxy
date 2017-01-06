@@ -1,6 +1,8 @@
 package com.lecheng.trade.service.customers.impl;
 
 import com.lecheng.trade.annotation.HttpRequest;
+import com.lecheng.trade.dao.mapper.TradeBankCardMapper;
+import com.lecheng.trade.dao.model.TradeBankCardDo;
 import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.BaseResponse;
 import com.lecheng.trade.facade.dto.customers.binding.AddRequest;
@@ -12,8 +14,10 @@ import com.lecheng.trade.service.BaseServiceImpl;
 import com.lecheng.trade.service.customers.BindingService;
 import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,6 +33,12 @@ public class BindingServiceImpl extends BaseServiceImpl implements BindingServic
      * 日志记录器
      */
     private static Logger logger = LoggerFactory.getLogger(BindingServiceImpl.class);
+
+    /**
+     * 银行卡数据访问接口
+     */
+    @Autowired
+    private TradeBankCardMapper tradeBankCardMapper;
 
     /**
      * 获取绑卡短信验证码
@@ -87,7 +97,19 @@ public class BindingServiceImpl extends BaseServiceImpl implements BindingServic
             response = new AddResponse(RespCode.SUCC.getValue(), RespCode.SUCC.getDesc());
             response.setRemoteResultCD(result);
             if (response.isResultOK()) {
-                response.setCard((Card) JsonUtils.toBean(JsonUtils.getJSONObject(result, "Card"), Card.class));
+                Card card = JsonUtils.toBean(JsonUtils.getJSONObject(result, "Card"), Card.class);
+                response.setCard(card);
+
+                try {
+                    //保存数据库
+                    TradeBankCardDo tradeBankCardDo = new TradeBankCardDo();
+                    PropertyUtils.copyProperties(tradeBankCardDo, req);
+                    tradeBankCardDo.setId(null);
+                    tradeBankCardDo.setBankCardId(card.getId());
+                    tradeBankCardMapper.insert(tradeBankCardDo);
+                } catch (Exception ne) {
+                    logger.error("用户绑卡成功,保存数据库失败", ne);
+                }
             }
         } catch (Exception e) {
             logger.error("绑卡错误", e);

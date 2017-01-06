@@ -6,5 +6,5 @@ package com.lecheng.trade.dao.model;
  * 日期: 2017/1/3 0003 13:50
  * 版本: V1.0
  */
-public class WithdrawDo extends BaseDo {
+public class TradeWithdrawDo extends BaseDo {
 }

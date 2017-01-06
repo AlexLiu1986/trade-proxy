@@ -1,8 +1,8 @@
 package com.lecheng.trade.service.customers.impl;
 
 import com.lecheng.trade.annotation.HttpRequest;
-import com.lecheng.trade.dao.mapper.MemberMapper;
-import com.lecheng.trade.dao.model.MemberDo;
+import com.lecheng.trade.dao.mapper.TradeCustomerMapper;
+import com.lecheng.trade.dao.model.TradeCustomerDo;
 import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.BaseResponse;
 import com.lecheng.trade.facade.dto.customers.regist.AddRequest;
@@ -38,7 +38,7 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
      * 会员信息数据访问接口
      */
     @Autowired
-    private MemberMapper memberMapper;
+    private TradeCustomerMapper tradeCustomerMapper;
 
     /**
      * 获取注册短信验证码
@@ -103,10 +103,10 @@ public class RegistServiceImpl extends BaseServiceImpl implements RegistService 
 
                 try {
                     //保存数据库
-                    MemberDo memberDo = new MemberDo();
-                    PropertyUtils.copyProperties(memberDo, req);
-                    PropertyUtils.copyProperties(memberDo, response);
-                    memberMapper.insert(memberDo);
+                    TradeCustomerDo tradeCustomerDo = new TradeCustomerDo();
+                    PropertyUtils.copyProperties(tradeCustomerDo, req);
+                    PropertyUtils.copyProperties(tradeCustomerDo, response);
+                    tradeCustomerMapper.insert(tradeCustomerDo);
                 } catch (Exception ne) {
                     logger.error("用户注册成功,保存数据库失败", ne);
                 }

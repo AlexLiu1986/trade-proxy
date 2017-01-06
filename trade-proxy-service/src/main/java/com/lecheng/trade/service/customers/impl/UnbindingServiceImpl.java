@@ -1,6 +1,9 @@
 package com.lecheng.trade.service.customers.impl;
 
 import com.lecheng.trade.annotation.HttpRequest;
+import com.lecheng.trade.dao.mapper.TradeBankCardMapper;
+import com.lecheng.trade.dao.model.TradeBankCardDo;
+import com.lecheng.trade.dao.model.TradeCustomerDo;
 import com.lecheng.trade.facade.constants.RespCode;
 import com.lecheng.trade.facade.dto.BaseResponse;
 import com.lecheng.trade.facade.dto.customers.unbinding.GetVCodeRequest;
@@ -13,6 +16,7 @@ import com.lecheng.trade.utils.JsonUtils;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,6 +32,12 @@ public class UnbindingServiceImpl extends BaseServiceImpl implements UnbindingSe
      * 日志记录器
      */
     private static Logger logger = LoggerFactory.getLogger(BindingServiceImpl.class);
+
+    /**
+     * 银行卡数据访问接口
+     */
+    @Autowired
+    private TradeBankCardMapper tradeBankCardMapper;
 
     /**
      * 获取解绑卡短信验证码
@@ -87,6 +97,20 @@ public class UnbindingServiceImpl extends BaseServiceImpl implements UnbindingSe
             response.setRemoteResultCD(result);
             if (response.isResultOK()) {
                 response.setBankCardId(JsonUtils.getInt(result, "BankCardId"));
+
+                try {
+                    //保存数据库
+                    TradeBankCardDo tradeBankCardDo = new TradeBankCardDo();
+                    tradeBankCardDo.setBankCardId(response.getBankCardId());
+                    tradeBankCardDo = tradeBankCardMapper.select(tradeBankCardDo);
+                    if (tradeBankCardDo == null) {
+                        logger.info("未找到用户银行卡信息,解绑用户银行卡失败");
+                    } else {
+                        tradeBankCardMapper.delete(tradeBankCardDo.getId());
+                    }
+                } catch (Exception ne) {
+                    logger.error("用户解绑银行卡成功,保存数据库失败", ne);
+                }
             }
         } catch (Exception e) {
             logger.error("获取语音验证码错误", e);

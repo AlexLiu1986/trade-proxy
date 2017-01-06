@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lecheng.trade.dao.mapper.TradeCustomerMapper">
+    <resultMap id="BaseResultMap" type="com.lecheng.trade.dao.model.TradeCustomerDo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="login_id" property="loginId" jdbcType="VARCHAR"/>
+        <result column="customer_id" property="customerId" jdbcType="INTEGER"/>
+        <result column="balance" property="balance" jdbcType="DECIMAL"/>
+        <result column="coupon" property="coupon" jdbcType="DECIMAL"/>
+        <result column="coupon_deadline" property="couponDeadline" jdbcType="TIMESTAMP"/>
+        <result column="member_id" property="memberId" jdbcType="VARCHAR"/>
+        <result column="mediacy_id" property="mediacyId" jdbcType="VARCHAR"/>
+        <result column="agent_id" property="agentId" jdbcType="VARCHAR"/>
+        <result column="agent_mobile" property="agentMobile" jdbcType="VARCHAR"/>
+        <result column="recommend_customer" property="recommendCustomer" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, mobile, login_id, customer_id, balance, coupon, coupon_deadline,
+        member_id, mediacy_id, agent_id, agent_mobile, recommend_customer, create_time, update_time
+    </sql>
+
+    <sql id="Select_SQL">
+        select
+        <include refid="Base_Column_List"/>
+        from trade_customer
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="mobile != null">
+                and mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="loginId != null">
+                and login_id = #{loginId,jdbcType=VARCHAR}
+            </if>
+            <if test="customerId != null">
+                and customer_id = #{customerId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="com.lecheng.trade.dao.model.TradeCustomerDo">
+        <include refid="Select_SQL"/>
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="com.lecheng.trade.dao.model.TradeCustomerDo">
+        <include refid="Select_SQL"/>
+    </select>
+
+    <select id="selectByMap" resultMap="BaseResultMap" parameterType="map">
+        <include refid="Select_SQL"/>
+    </select>
+
+    <select id="selectListByMap" resultMap="BaseResultMap" parameterType="map">
+        <include refid="Select_SQL"/>
+    </select>
+
+    <insert id="insert" parameterType="com.lecheng.trade.dao.model.TradeCustomerDo">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into trade_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="loginId != null">
+                login_id,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="coupon != null">
+                coupon,
+            </if>
+            <if test="couponDeadline != null">
+                coupon_deadline,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="mediacyId != null">
+                mediacy_id,
+            </if>
+            <if test="agentId != null">
+                agent_id,
+            </if>
+            <if test="agentMobile != null">
+                agent_mobile,
+            </if>
+            <if test="recommendCustomer != null">
+                recommend_customer,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null">
+                #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="coupon != null">
+                #{coupon,jdbcType=DECIMAL},
+            </if>
+            <if test="couponDeadline != null">
+                #{couponDeadline,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="mediacyId != null">
+                #{mediacyId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentId != null">
+                #{agentId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentMobile != null">
+                #{agentMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="recommendCustomer != null">
+                #{recommendCustomer,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.lecheng.trade.dao.model.TradeCustomerDo">
+        update trade_customer
+        <set>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null">
+                login_id = #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="coupon != null">
+                coupon = #{coupon,jdbcType=DECIMAL},
+            </if>
+            <if test="couponDeadline != null">
+                coupon_deadline = #{couponDeadline,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="mediacyId != null">
+                mediacy_id = #{mediacyId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentId != null">
+                agent_id = #{agentId,jdbcType=VARCHAR},
+            </if>
+            <if test="agentMobile != null">
+                agent_mobile = #{agentMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="recommendCustomer != null">
+                recommend_customer = #{recommendCustomer,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
